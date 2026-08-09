@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Global Markets Command Center — MPF Mixed Asset Fund</title>
+<meta name="description" content="Real-time global market monitoring dashboard for the CIO of an MPF mixed asset fund." />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a78d6'/%3E%3Cpath d='M6 21 L13 13 L18 18 L26 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+<div class="app">
+
+  <header class="header">
+    <div class="header-title">
+      <h1>Global Markets Command Center</h1>
+      <p>MPF Mixed Asset Fund — CIO Dashboard</p>
+    </div>
+    <div class="sessions" id="sessions"></div>
+    <div class="header-status">
+      <span class="status-pill sim" id="dataStatusPill"><span class="dot"></span><span id="dataStatusText">Loading…</span></span>
+      <span class="clock" id="clock">—</span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">Theme</button>
+    </div>
+  </header>
+
+  <section class="kpi-strip" id="kpiStrip"></section>
+
+  <section class="grid">
+    <div class="panel span-4">
+      <h2>Asia-Pacific <span class="sub">indices</span></h2>
+      <div id="tbl-apac"></div>
+    </div>
+    <div class="panel span-4">
+      <h2>Europe <span class="sub">indices</span></h2>
+      <div id="tbl-europe"></div>
+    </div>
+    <div class="panel span-4">
+      <h2>Americas <span class="sub">indices</span></h2>
+      <div id="tbl-americas"></div>
+    </div>
+
+    <div class="panel span-6">
+      <h2>Fixed Income &amp; Rates <span class="sub">US Treasury curve · sovereign yields · HIBOR</span></h2>
+      <div id="yieldCurveWrap"></div>
+      <div id="tbl-rates"></div>
+    </div>
+    <div class="panel span-6">
+      <h2>FX <span class="sub">majors · HKD linked exchange rate</span></h2>
+      <div id="tbl-fx"></div>
+      <div id="hkdPeg"></div>
+    </div>
+
+    <div class="panel span-4">
+      <h2>Commodities</h2>
+      <div id="tbl-commod"></div>
+    </div>
+    <div class="panel span-4">
+      <h2>Volatility &amp; Risk</h2>
+      <div class="gauge-row" id="gaugeRow"></div>
+    </div>
+    <div class="panel span-4">
+      <h2>MPF Allocation Mix <span class="sub">strategic target</span></h2>
+      <div id="allocDonut"></div>
+    </div>
+
+    <div class="panel span-6">
+      <h2>Allocation Drift <span class="sub">current vs. target weight</span></h2>
+      <div class="meter-rows" id="allocMeters"></div>
+    </div>
+    <div class="panel span-6">
+      <h2>Sector Heatmap <span class="sub">illustrative regional equity sectors</span></h2>
+      <div class="heatmap" id="heatmap"></div>
+      <div class="legend-inline">
+        <span><i style="background:var(--series-blue)"></i> Outperforming</span>
+        <span><i style="background:var(--diverging-mid)"></i> Flat</span>
+        <span><i style="background:var(--series-red)"></i> Underperforming</span>
+      </div>
+    </div>
+
+    <div class="panel span-12">
+      <h2>Alerts &amp; Risk Feed <span class="sub">rule-based, evaluated every tick</span></h2>
+      <div class="alerts-list" id="alertsList"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div id="footerStatus">—</div>
+    <div>Not investment advice. For internal CIO monitoring use only. Simulated data is clearly labeled and must not be used for trading or valuation decisions.</div>
+    <div>See <b>README.md</b> for how to wire a licensed real-time market data feed (Bloomberg / Refinitiv-LSEG / ICE / exchange direct).</div>
+  </footer>
+
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

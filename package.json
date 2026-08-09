@@ -1,0 +1,14 @@
+{
+  "name": "mpf-markets-dashboard",
+  "version": "1.0.0",
+  "description": "Real-time global market monitoring dashboard for the CIO of an MPF mixed asset fund.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "serve:static": "python3 -m http.server 8080"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
