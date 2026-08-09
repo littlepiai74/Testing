@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tradingview": {
+      "command": "C:\\Users\\piusc\\.local\\bin\\uvx.exe",
+      "args": ["--from", "tradingview-mcp-server", "tradingview-mcp"]
+    }
+  }
+}
