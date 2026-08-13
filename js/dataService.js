@@ -1,8 +1,8 @@
-import { INDICES, RATES, FX, COMMODITIES, VOLATILITY, REFRESH_INTERVAL_MS } from "./config.js";
+import { INDICES, RATES, FX, COMMODITIES, VOLATILITY, CREDIT, REFRESH_INTERVAL_MS } from "./config.js";
 import { createSimulationEngine } from "./providers/simulate.js";
 import { probeLocalProxy, fetchQuotes } from "./providers/localProxy.js";
 
-const ALL_INSTRUMENTS = [...INDICES, ...RATES, ...FX, ...COMMODITIES, ...VOLATILITY];
+const ALL_INSTRUMENTS = [...INDICES, ...RATES, ...FX, ...COMMODITIES, ...VOLATILITY, ...CREDIT];
 const BY_ID = new Map(ALL_INSTRUMENTS.map((i) => [i.id, i]));
 const BY_FEED_SYMBOL = new Map(ALL_INSTRUMENTS.filter((i) => i.feedSymbol).map((i) => [i.feedSymbol, i.id]));
 

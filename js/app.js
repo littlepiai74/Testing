@@ -1,5 +1,5 @@
 import {
-  INDICES, RATES, FX, COMMODITIES, VOLATILITY, SECTORS, MPF_ALLOCATION_TARGET, REGIONS,
+  INDICES, RATES, FX, COMMODITIES, VOLATILITY, CREDIT, SECTORS, MPF_ALLOCATION_TARGET, REGIONS,
 } from "./config.js";
 import { createDataService } from "./dataService.js";
 import { getSessionStatuses } from "./sessions.js";
@@ -172,6 +172,21 @@ function renderCommodities(quotesById) {
     </table>`;
 }
 
+function renderCreditPanel(quotesById) {
+  const rows = CREDIT.map((c) => quotesById.get(c.id)).filter(Boolean).map((q) => `
+    <tr>
+      <td class="name">${q.name}</td>
+      <td class="num">${fmtNum(q.price, q.decimals)}<span class="market">${q.unit}</span></td>
+      <td class="num" style="color:${deltaColor(-q.chgAbs)}">${fmtSigned(q.chgAbs, 0, "bp")}</td>
+      <td class="sparkcell">${sparklineSVG(q.history, { positive: q.chgAbs < 0 })}</td>
+    </tr>`).join("");
+  document.getElementById("tbl-credit").innerHTML = `
+    <table class="instr">
+      <thead><tr><th>Spread (OAS)</th><th style="text-align:right">Level</th><th style="text-align:right">Chg</th><th style="text-align:right">Trend</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
 function zonesFor(thresholds, max) {
   return [
     { from: 0, to: thresholds.warning, color: "var(--status-good)" },
@@ -329,6 +344,7 @@ service.subscribe((payload) => {
   renderRatesPanel(quotesById);
   renderFxPanel(quotesById);
   renderCommodities(quotesById);
+  renderCreditPanel(quotesById);
   renderGauges(quotesById);
   const allocRows = renderAllocation();
   renderHeatmap();

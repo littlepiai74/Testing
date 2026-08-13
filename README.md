@@ -93,6 +93,10 @@ token swaps, not per-chart logic.
 - **FX** — DXY, EUR/USD, GBP/USD, USD/JPY, USD/CNH, USD/HKD with a visual
   Linked Exchange Rate (peg) band indicator.
 - **Commodities** — Gold, Silver, Brent, WTI, Copper.
+- **Credit Spreads** — US IG, US HY, and EM Sovereign option-adjusted spreads
+  (OAS) vs. Treasuries, in basis points; widening spreads (credit stress) are
+  colored red, tightening green, inverted from the usual up=green convention
+  since spread widening is the risk-off direction.
 - **Volatility & Risk** — VIX and VHSI semicircular gauges with
   calm/elevated/stress zones.
 - **MPF Allocation Mix** — donut of current weights against a hypothetical
@@ -103,14 +107,15 @@ token swaps, not per-chart logic.
 - **Sector Heatmap** — illustrative regional sector performance.
 - **Alerts & Risk Feed** — auto-generated from `js/alerts.js` rules every
   tick: VIX/VHSI thresholds, ±1.5%/±3% index moves, HKD peg-edge proximity,
-  10Y-2Y curve inversion/flattening, and allocation drift bands.
+  10Y-2Y curve inversion/flattening, credit spread thresholds, and allocation
+  drift bands.
 
 ## Configuring it for your fund
 
 Everything instrument- and fund-specific lives in `js/config.js`:
 
-- `INDICES`, `RATES`, `FX`, `COMMODITIES`, `VOLATILITY` — the instrument
-  universe and simulation baselines/volatility.
+- `INDICES`, `RATES`, `FX`, `COMMODITIES`, `VOLATILITY`, `CREDIT` — the
+  instrument universe and simulation baselines/volatility.
 - `MPF_ALLOCATION_TARGET` — your fund's actual strategic asset allocation.
 - `ALERT_RULES` — drift and move thresholds.
 - `MARKET_SESSIONS` — trading hours per venue (approximate; does not account
