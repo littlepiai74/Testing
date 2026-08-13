@@ -62,6 +62,13 @@ export const VOLATILITY = [
   { id: "vhsi", name: "VHSI (HK Vol)", baseline: 18.6, vol: 0.045, decimals: 2, thresholds: { warning: 24, critical: 32 } },
 ];
 
+// Option-adjusted spreads over Treasuries, in basis points. Widening spreads signal credit stress.
+export const CREDIT = [
+  { id: "igoas", name: "US IG OAS", baseline: 92, vol: 0.012, decimals: 0, unit: "bp", thresholds: { warning: 130, critical: 170 } },
+  { id: "hyoas", name: "US HY OAS", baseline: 305, vol: 0.018, decimals: 0, unit: "bp", thresholds: { warning: 420, critical: 550 } },
+  { id: "emoas", name: "EM Sovereign OAS", baseline: 245, vol: 0.015, decimals: 0, unit: "bp", thresholds: { warning: 350, critical: 450 } },
+];
+
 export const SECTORS = [
   "Financials", "Technology", "Real Estate", "Energy", "Materials",
   "Utilities", "Cons. Discretionary", "Cons. Staples", "Healthcare",
@@ -85,6 +92,7 @@ export const ALERT_RULES = {
   indexMoveWarning: 1.5, // % daily move
   indexMoveCritical: 3,
   yieldCurveInvertWarning: 0.10, // 10Y-2Y spread (pp) below which "flat" warning fires
+  creditWideningNotable: 15, // bp single-tick widening treated as notable
 };
 
 export const MARKET_SESSIONS = [

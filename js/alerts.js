@@ -24,6 +24,18 @@ export function evaluateAlerts(quotesById, allocationRows) {
     alerts.push(makeAlert(sev, "HK volatility elevated", `VHSI at ${vhsi.price.toFixed(1)}.`));
   }
 
+  for (const id of ["igoas", "hyoas", "emoas"]) {
+    const q = quotesById.get(id);
+    if (!q || !q.meta.thresholds) continue;
+    if (q.price >= q.meta.thresholds.critical) {
+      alerts.push(makeAlert("critical", `${q.name} stressed`, `${q.name} at ${q.price.toFixed(0)}bp — above critical threshold (${q.meta.thresholds.critical}bp).`));
+    } else if (q.price >= q.meta.thresholds.warning) {
+      alerts.push(makeAlert("warning", `${q.name} widening`, `${q.name} at ${q.price.toFixed(0)}bp — above warning threshold (${q.meta.thresholds.warning}bp).`));
+    } else if (q.chgAbs >= ALERT_RULES.creditWideningNotable) {
+      alerts.push(makeAlert("notice", `${q.name} widened sharply`, `+${q.chgAbs.toFixed(0)}bp today to ${q.price.toFixed(0)}bp.`));
+    }
+  }
+
   for (const q of quotesById.values()) {
     if (!q.meta.region) continue; // indices only
     const abs = Math.abs(q.chgPct);
